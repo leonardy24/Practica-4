@@ -21,11 +21,11 @@ public class Main {
 		localizador: indica la dirección IP, puerto y nombre de la base de datos a la que
 		conectar.*/
 		
-		
+		Connection conexion= null;
 		
 		
 		try {  //nueva conexion
-				Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/primera_bd", "primera_bd", "primera_bd");
+				conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/primera_bd", "primera_bd", "primera_bd");
 				System.out.println("Base de datos: " + conexion.getMetaData().getDriverVersion());
 					//capturamos  posibeles execiones	
 				Statement instruccion = conexion.createStatement();
@@ -130,7 +130,7 @@ public class Main {
 			e.printStackTrace();
 		}finally {
 			//liberarar la instrucuion
-			
+		
 		}
 		
 		

@@ -4,7 +4,7 @@ public class Persona {
 
 	protected int id;
 	protected String usuario;
-	protected int password;
+	protected String password;
 	protected String correo;
 	
 	
@@ -17,7 +17,7 @@ public class Persona {
 	
 	//contructor parametrizado
 	
-	public Persona(int id, String usuario, int password, String correo){
+	public Persona(int id, String usuario, String password, String correo){
 		this.id = id;
 		this.usuario = usuario;
 		this.password = password;
@@ -43,11 +43,15 @@ public class Persona {
 		this.usuario = usuario;
 	}
 
-	public int getPassword() {
+
+
+	
+
+	public String getPassword() {
 		return password;
 	}
 
-	public void setPassword(int password) {
+	public void setPassword(String password) {
 		this.password = password;
 	}
 
