@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import app.curso.banco.db.DateBaseGestor;
 import cliente.gestor.Gestor;
 
-public class Main {
+public class BancoMain {
 
 	
 	
@@ -19,21 +19,23 @@ public class Main {
 		//inserta gestor
 		Gestor gestor = new Gestor(1,"gestor1", "gestor1","gestro@gmail.com" );
 		
-		database.insertarGestor(gestor);*/
+		dateBase.insertarGestor(gestor);*/
 		
 		//llamar gestores
-		//ArrayList<Gestor>gestores = database.getGestores() ;
-		
-		ArrayList<Gestor> gestores = dateBase.getGestores();
-		System.out.println(gestores);
 		
 		
+		ArrayList<Gestor> gestoresMain = dateBase.obtenerGestores();
+		
+		gestoresMain.forEach((llamado) -> {
+			
+			System.out.println("id del gestor :" + llamado.getId() + "  " + "usuario : " + llamado.getUsuario()+ " "+ "contraseña :" +"  "+ llamado.getPassword());
+		});
 		
 		
+	
+		//Gestor llamarGestores = dateBase.getClass();
 		
 		
-		
-		System.out.println(gestores);
 		
 		
 		

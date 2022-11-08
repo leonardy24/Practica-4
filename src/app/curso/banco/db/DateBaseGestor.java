@@ -20,14 +20,14 @@ public class DateBaseGestor {
 		
 		try {
 			
-			conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/banco",
-					"banco", "banco");
+			conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/banco",	"banco", "banco");
 			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
 	}
 	
+	//inserta gestor
 	public boolean insertarGestor(Gestor gestor) {
 		
 		Statement instruccion = null;
@@ -35,7 +35,7 @@ public class DateBaseGestor {
 		try {
 			instruccion = conexion.createStatement();
 			
-			PreparedStatement ps = conexion.prepareStatement("INSERT INTO gestor(usuario,password, correo) VALUES (?,?,?)");
+			PreparedStatement ps = conexion.prepareStatement("INSERT INTO gestor1(usuario,password, correo) VALUES (?,?,?)");
 		
 			ps.setString(1, gestor.getUsuario());
 			
@@ -67,7 +67,9 @@ public class DateBaseGestor {
 			
 		return false;
 	}
-	public ArrayList<Gestor> getGestores() {
+	
+	//obtener todos los gestores
+	public ArrayList<Gestor> obtenerGestores() {
 	
 		Statement instruccion = null;
 	
@@ -79,8 +81,10 @@ public class DateBaseGestor {
 		
 		instruccion = conexion.createStatement();
 		
+		String codigo = "SELECT * FROM gestor1";
 		
-		ResultSet resultados = instruccion.executeQuery("SELECT * from gestor");
+		
+		ResultSet resultados = instruccion.executeQuery(codigo);
 		
 		while (resultados.next()) {
 		
@@ -99,17 +103,7 @@ public class DateBaseGestor {
 		
 		
 		return gestores;
-		
-		
-	
-		
-		
-		
-		
-		
-		
-		
-		
+			
 		
 	} catch (SQLException e) {
 		e.printStackTrace();
@@ -122,57 +116,49 @@ public class DateBaseGestor {
 			e.printStackTrace();
 			
 		}
-		}
-		}
+	  }
+	}
 		
 	return null;
 	
 	}
 		
-	
-	
-	public boolean actualizarGestor(Gestor gestor) {
+	/*
+	public boolean obtenerUnGestor() {
 		
-		PreparedStatement instrucion = null;
+		Statement instruccion = null;
+		
 		
 		try {
+			instruccion = conexion.createStatement();
 			
 			
-			
-			String quety = "UPDATE gestor SET usuario = ? , password = ?, correo = ?";
-			
-			instrucion = conexion.prepareStatement(quety);
-			
-			instrucion.setString(1, gestor.getUsuario()); 
-			
-			instrucion.setString(2, gestor.getPassword()); 
-			
-			instrucion.setString(3, gestor.getCorreo());
-			
-			instrucion.setInt(4, gestor.getId()); 
-			
-			
-			
-			
-			
-			
-			
-			
-			
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}
-		
+		};
 		
 		
 		
 		return false;
+	};*/
+		
+	
+			
+			
+			
+			
+
+		
+		
+		
+		
+		
+		
+		
 	}
 	
 		
 		
 		
-		}
+		
 		
 	
 	
