@@ -22,8 +22,6 @@ public class BancoMain {
 		dateBase.insertarGestor(gestor);*/
 		
 		//llamar gestores
-		
-		
 		ArrayList<Gestor> gestoresMain = dateBase.obtenerGestores();
 		
 		gestoresMain.forEach((llamado) -> {
@@ -32,10 +30,46 @@ public class BancoMain {
 		});
 		
 		
+		//insertar un gestor por id
+		
+		Gestor gestor = dateBase.obtenerUnGestor(1);
+		
+		if(gestor != null) {
+			System.out.println("el gestor 1 es :" + gestor.getUsuario());
+			
+		}else {
+			System.out.println("");
+		}
+		
+		
+		
+		//eliminar
+		
+		boolean gestorBorrado = dateBase.eliminarGestor(1);
+		
+		if(gestorBorrado) {
+			
+		System.out.println("el gestor 1 se ha eliminado :" );
+		}else {
+			System.out.println("el ggestor no se ha eliminado :" );
+
+		};
+		
+		
+		//actualizar 
+		
+		
+		gestor.setCorreo("otro@gmail.com");
+		
+		boolean gestorActualizado = dateBase.actualizarGestor(gestor);
+		
+		if(gestorActualizado) {
+			System.out.println("se ha actualizado el gestor");
+		}else {
+			System.out.println("no se ha actualizado el gestor ");
+		}
+		
 	
-		//Gestor llamarGestores = dateBase.getClass();
-		
-		
 		
 		
 		
