@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import MainGestores.MainCrearGestor;
 import cliente.gestor.Gestor;
 
 public class DateBaseGestor {
@@ -27,14 +28,15 @@ public class DateBaseGestor {
 
 	// inserta gestor
 	public boolean insertarGestor(Gestor gestor) {
-
+		
+		//MainCrear creando = new MainCrear();
 		PreparedStatement ps = null;
 
 		try {
 			
 
 			 
-			ps = conexion.prepareStatement("INSERT INTO gestor(usuario,password, correo) VALUES (?,?,?)");
+			ps = conexion.prepareStatement("INSERT INTO gestor1(usuario,password, correo) VALUES (?,?,?)");
 
 			ps.setString(1, gestor.getUsuario());
 
@@ -76,7 +78,7 @@ public class DateBaseGestor {
 
 			instruccion = conexion.createStatement();
 
-			String codigo = "SELECT * FROM gestor";
+			String codigo = "SELECT * FROM gestor1";
 
 			ResultSet resultados = instruccion.executeQuery(codigo);
 
@@ -122,7 +124,7 @@ public class DateBaseGestor {
 		Gestor gestor = null;
 
 		try {
-			String idLlamado = "SELECT * FROM gestor WHERE id = ?";
+			String idLlamado = "SELECT * FROM gestor1 WHERE id = ?";
 
 			instruccion = conexion.prepareStatement(idLlamado);
 
@@ -155,13 +157,13 @@ public class DateBaseGestor {
 		return gestor;
 
 	};
-
+	//emilinar gestores
 	public boolean eliminarGestor(int id) {
 
 		PreparedStatement instruccion = null;
 
 		try {
-			String eliminar = "DELETE FROM gestor WHERE id = ?";
+			String eliminar = "DELETE FROM gestor1 WHERE id = ?";
 
 			instruccion = conexion.prepareStatement(eliminar);
 
@@ -186,7 +188,7 @@ public class DateBaseGestor {
 
 		return false;
 	}
-
+	//actualizar gestores
 	public boolean actualizarGestor(Gestor gestor) {
 	
 		PreparedStatement instruccion = null;
@@ -195,7 +197,7 @@ public class DateBaseGestor {
 		
 		try {
 			
-			String actualizar = "UPDATE gestor SET usuario = ?, password = ?, correo = ? WHERE id =?";
+			String actualizar = "UPDATE gestor1 SET usuario = ?, password = ?, correo = ? WHERE id =?";
 			
 			
 			instruccion = conexion.prepareStatement(actualizar);

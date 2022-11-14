@@ -1,4 +1,4 @@
-package main;
+package MainGestores;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ public class BancoMain {
 		});
 		
 		
-		//insertar un gestor por id
+		//llamar un gestor por id
 		
 		Gestor gestor = dateBase.obtenerUnGestor(1);
 		
