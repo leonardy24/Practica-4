@@ -3,33 +3,30 @@ package cliente.gestor;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.sql.Timestamp;
-public class Mensaje{
-		
-		private int id;
-		private int id_origen;
-		private int id_destino;
-		private String texto;
-		private Timestamp datetime;
-		
-	//contructor por defecto
-	public Mensaje() {
-	
-};
-	
-	//constructor parametrizado
-	public Mensaje(int id, int id_origen,int id_destino, String texto,Timestamp datetime ) {
-	
-		this.id= id;
-		this.id_origen=id_origen;
-		this.id_destino=id_destino;
-		this.texto= texto;
-		this.datetime=datetime;
-	
-}
-	
-	
-	
 
+public class Mensaje {
+
+	private int id;
+	private int id_origen;
+	private int id_destino;
+	private String texto;
+	private Timestamp datetime;
+
+	// contructor por defecto
+	public Mensaje() {
+
+	};
+
+	// constructor parametrizado
+	public Mensaje(int id, int id_origen, int id_destino, String texto, Timestamp datetime) {
+
+		this.id = id;
+		this.id_origen = id_origen;
+		this.id_destino = id_destino;
+		this.texto = texto;
+		this.datetime = datetime;
+
+	}
 
 	public Timestamp getDatetime() {
 		return datetime;
@@ -71,7 +68,4 @@ public class Mensaje{
 		this.texto = texto;
 	}
 
-	
-	
-	
 }

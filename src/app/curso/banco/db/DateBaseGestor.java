@@ -28,14 +28,12 @@ public class DateBaseGestor {
 
 	// inserta gestor
 	public boolean insertarGestor(Gestor gestor) {
-		
-		//MainCrear creando = new MainCrear();
+
+		// MainCrear creando = new MainCrear();
 		PreparedStatement ps = null;
 
 		try {
-			
 
-			 
 			ps = conexion.prepareStatement("INSERT INTO gestor1(usuario,password, correo) VALUES (?,?,?)");
 
 			ps.setString(1, gestor.getUsuario());
@@ -157,7 +155,8 @@ public class DateBaseGestor {
 		return gestor;
 
 	};
-	//emilinar gestores
+
+	// emilinar gestores
 	public boolean eliminarGestor(int id) {
 
 		PreparedStatement instruccion = null;
@@ -170,6 +169,7 @@ public class DateBaseGestor {
 			instruccion.setInt(1, id);
 
 			int filasEliminadas = instruccion.executeUpdate();
+
 			return filasEliminadas != 0;
 
 		} catch (SQLException e) {
@@ -188,34 +188,30 @@ public class DateBaseGestor {
 
 		return false;
 	}
-	//actualizar gestores
+
+	// actualizar gestores
 	public boolean actualizarGestor(Gestor gestor) {
-	
+
 		PreparedStatement instruccion = null;
-		
-		
-		
+
 		try {
-			
+
 			String actualizar = "UPDATE gestor1 SET usuario = ?, password = ?, correo = ? WHERE id =?";
-			
-			
+
 			instruccion = conexion.prepareStatement(actualizar);
-			
+
 			instruccion.setString(1, gestor.getUsuario());
-			
+
 			instruccion.setString(2, gestor.getPassword());
-			
+
 			instruccion.setString(3, gestor.getCorreo());
-			
+
 			instruccion.setInt(4, gestor.getId());
-			
+
 			int filasActualizadas = instruccion.executeUpdate();
-			
+
 			return filasActualizadas != 0;
-			
-			
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -229,14 +225,8 @@ public class DateBaseGestor {
 				}
 			}
 		}
-		
-		
+
 		return false;
 	};
-	
-	
-	
-	
-	
-	
+
 };

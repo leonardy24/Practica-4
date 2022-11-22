@@ -6,25 +6,20 @@ public class Persona {
 	protected String usuario;
 	protected String password;
 	protected String correo;
-	
-	
-	
-	
-	//constructor por defecto
-	public Persona (){
-		
+
+	// constructor por defecto
+	public Persona() {
+
 	};
-	
-	//contructor parametrizado
-	
-	public Persona(int id, String usuario, String password, String correo){
+
+	// contructor parametrizado
+
+	public Persona(int id, String usuario, String password, String correo) {
 		this.id = id;
 		this.usuario = usuario;
 		this.password = password;
 		this.correo = correo;
-		
-		
-		
+
 	}
 
 	public int getId() {
@@ -43,10 +38,6 @@ public class Persona {
 		this.usuario = usuario;
 	}
 
-
-
-	
-
 	public String getPassword() {
 		return password;
 	}
@@ -62,10 +53,5 @@ public class Persona {
 	public void setCorreo(String correo) {
 		this.correo = correo;
 	};
-	
-	
-	
-	
-	
-	
+
 }

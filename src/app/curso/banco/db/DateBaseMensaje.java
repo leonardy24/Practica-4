@@ -18,46 +18,41 @@ import cliente.gestor.Mensaje;
 public class DateBaseMensaje {
 
 	private Connection conexion;
-	
-	
+
 	public DateBaseMensaje() {
-		
-		
+
 		try {
 
-		conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/banco", "banco", "banco");
+			conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/banco", "banco", "banco");
 
-									
-	} catch (SQLException e) {
-		e.printStackTrace();
-}
-			
-}
-	
-	public boolean insertarMensaje (Mensaje mensaje) {
-		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	public boolean insertarMensaje(Mensaje mensaje) {
+
 		PreparedStatement IngresarMensaje = null;
 
 		try {
-			
-			String mensaje1 = "INSERT INTO mensaje(id_destino,id_origen,texto)VALUES(?,?,?)";
-			
-			IngresarMensaje = conexion.prepareStatement(mensaje1);
-			
-			IngresarMensaje.setInt(1, mensaje.getId_destino());
-			
-			IngresarMensaje.setInt(2, mensaje.getId_origen());
-			
-			IngresarMensaje.setString(3, mensaje.getTexto());
-			
-			IngresarMensaje.executeUpdate();
-			
-			IngresarMensaje.close();
-			
-			return true;
-			//insertarCliente.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
 
-			
+			String mensaje1 = "INSERT INTO mensaje(id_destino,id_origen,texto)VALUES(?,?,?)";
+
+			IngresarMensaje = conexion.prepareStatement(mensaje1);
+
+			IngresarMensaje.setInt(1, mensaje.getId_destino());
+
+			IngresarMensaje.setInt(2, mensaje.getId_origen());
+
+			IngresarMensaje.setString(3, mensaje.getTexto());
+
+			IngresarMensaje.executeUpdate();
+
+			IngresarMensaje.close();
+
+			return true;
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -70,45 +65,40 @@ public class DateBaseMensaje {
 				}
 			}
 		}
-	return false;	
+		return false;
 	}
-		
-	
-		public ArrayList<Mensaje> obtenerMensaje() {
 
-			Statement instruccion = null;
+	public ArrayList<Mensaje> obtenerMensaje() {
 
-			ArrayList<Mensaje> clientes = new ArrayList<Mensaje>();
+		Statement instruccion = null;
 
-			try {
+		ArrayList<Mensaje> clientes = new ArrayList<Mensaje>();
 
-				instruccion = conexion.createStatement();
+		try {
 
-				String codigo = "SELECT * FROM mensaje";
+			instruccion = conexion.createStatement();
 
-				ResultSet resultados = instruccion.executeQuery(codigo);
+			String codigo = "SELECT * FROM mensaje";
 
-				while (resultados.next()) {
+			ResultSet resultados = instruccion.executeQuery(codigo);
 
-					int id = resultados.getInt("id");
-					int id_origen = resultados.getInt("id_origen");
-					int id_destino = resultados.getInt("id_destino");
-					String texto = resultados.getString("texto");
-					java.sql.Timestamp fecha = resultados.getTimestamp("fecha");
+			while (resultados.next()) {
 
-					Mensaje mensaje = new Mensaje(id, id_origen, id_destino, texto,fecha);
+				int id = resultados.getInt("id");
+				int id_origen = resultados.getInt("id_origen");
+				int id_destino = resultados.getInt("id_destino");
+				String texto = resultados.getString("texto");
+				java.sql.Timestamp fecha = resultados.getTimestamp("fecha");
 
-					clientes.add(mensaje);
-				}
+				Mensaje mensaje = new Mensaje(id, id_origen, id_destino, texto, fecha);
 
-				instruccion.close();
+				clientes.add(mensaje);
+			}
 
-				return clientes;
+			instruccion.close();
 
-			
-			
-			
-			
+			return clientes;
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -122,27 +112,25 @@ public class DateBaseMensaje {
 				}
 			}
 		}
-		
+
 		return null;
 	}
 
-		
 	public boolean eliminarMensaje(int id) {
-		
-		PreparedStatement instruccion=null;
-		
+
+		PreparedStatement instruccion = null;
+
 		try {
-			String EliminarGestor ="DELETE FROM mensaje WHERE id=?";
-			
+			String EliminarGestor = "DELETE FROM mensaje WHERE id=?";
+
 			instruccion = conexion.prepareStatement(EliminarGestor);
-			
+
 			instruccion.setInt(1, id);
-			
-			int llamadoEliminar =instruccion.executeUpdate();
-			
-			return llamadoEliminar!=0;
-			
-			
+
+			int llamadoEliminar = instruccion.executeUpdate();
+
+			return llamadoEliminar != 0;
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -156,42 +144,36 @@ public class DateBaseMensaje {
 				}
 			}
 		}
-		
-		
-		
-		
-		
-		
+
 		return false;
 	};
 
-	
 	public Mensaje obtenerMensajeId(int id) {
-		
-		PreparedStatement instruccion =null;
-		
-		Mensaje mensaje=null;
-		
+
+		PreparedStatement instruccion = null;
+
+		Mensaje mensaje = null;
+
 		try {
-			
-			String obtener ="SELECT * FROM mensaje WHERE id=?";
-			
+
+			String obtener = "SELECT * FROM mensaje WHERE id=?";
+
 			instruccion = conexion.prepareStatement(obtener);
-			
+
 			instruccion.setInt(1, id);
-			
+
 			ResultSet resultado = instruccion.executeQuery();
-			
-			if(resultado.next()) {
+
+			if (resultado.next()) {
 				mensaje = new Mensaje();
 				mensaje.setId(resultado.getInt("id"));
 				mensaje.setId_origen(resultado.getInt("id_origen"));
 				mensaje.setId_destino(resultado.getInt("id_destino"));
 				mensaje.setTexto(resultado.getString("texto"));
 				mensaje.setDatetime(resultado.getTimestamp("fecha"));
-			};
-			
-			
+			}
+			;
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -205,37 +187,33 @@ public class DateBaseMensaje {
 				}
 			}
 		}
-		
-		
+
 		return mensaje;
 	}
-		
+
 	public boolean actualizarMensaje(Mensaje mensaje) {
-		
-		PreparedStatement instruccion =null;
-		
+
+		PreparedStatement instruccion = null;
+
 		try {
-			
-		String actualizar ="UPDATE mensaje SET  id_origen = ?, id_destino = ?, texto =?, fecha=? WHERE id =?";
-		
-		
-		instruccion = conexion.prepareStatement(actualizar);
-		
-		
-		instruccion.setInt(1, mensaje.getId_origen());
-		
-		instruccion.setInt(2, mensaje.getId_destino());
-		
-		instruccion.setString(3, mensaje.getTexto());
-		
-		instruccion.setTimestamp(4, mensaje.getDatetime());
 
-		instruccion.setInt(5, mensaje.getId());
-		
-		
-		int filasActualizadas = instruccion.executeUpdate();
+			String actualizar = "UPDATE mensaje SET  id_origen = ?, id_destino = ?, texto =?, fecha=? WHERE id =?";
 
-		return filasActualizadas !=0;
+			instruccion = conexion.prepareStatement(actualizar);
+
+			instruccion.setInt(1, mensaje.getId_origen());
+
+			instruccion.setInt(2, mensaje.getId_destino());
+
+			instruccion.setString(3, mensaje.getTexto());
+
+			instruccion.setTimestamp(4, mensaje.getDatetime());
+
+			instruccion.setInt(5, mensaje.getId());
+
+			int filasActualizadas = instruccion.executeUpdate();
+
+			return filasActualizadas != 0;
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -250,12 +228,8 @@ public class DateBaseMensaje {
 				}
 			}
 		}
-		
-		
-		
+
 		return false;
 	}
 
-	
-	
 }

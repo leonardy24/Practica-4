@@ -57,6 +57,7 @@ public class MainPrincipal {
 			System.out.println("20. ACTUALIZAR TRANSFERENCIA");
 			System.out.println("0. SALIR");
 			System.out.println("_______________________________________");
+			System.out.println("COLOQUE SU OPCION:");
 
 			menuSeleccionado = keyboard.nextInt();
 
@@ -67,6 +68,7 @@ public class MainPrincipal {
 				break;
 
 			case 1:
+				// CREAANDO GESTOR
 				DateBaseGestor dateBaseCrear = new DateBaseGestor();
 
 				System.out.println("CREANDO GESTOR:");
@@ -88,18 +90,15 @@ public class MainPrincipal {
 
 				System.out.println("-----------------------");
 
-				System.out.println("SU GESTRO SE HA CREADO CORRECTAMENTE. PUEDE VERIFICARLO EN LA BASE DE DATOS");
+				System.out.println("SU GESTOR SE HA CREADO CORRECTAMENTE. PUEDE VERIFICARLO EN LA BASE DE DATOS");
 
 				break;
 
 			case 2:
-
+				// OBTENER TODOS LOS GESTORES
 				Scanner Keyboard = new Scanner(System.in);
 
 				DateBaseGestor obtenerG = new DateBaseGestor();
-
-				// System.out.println("MARQUE CON UN SI O NO" );
-				// String respuesta = Keyboard.next();
 
 				ArrayList<Gestor> gestoresMain = obtenerG.obtenerGestores();
 
@@ -119,6 +118,7 @@ public class MainPrincipal {
 				break;
 
 			case 3:
+				// OBTENER GESTORES POR ID
 				DateBaseGestor obtenerGestoresPorId = new DateBaseGestor();
 
 				System.out.println("OBTENIENDO GESTORES POR ID");
@@ -127,19 +127,23 @@ public class MainPrincipal {
 
 				int id = keyboard.nextInt();
 
-				Gestor gestor1 = obtenerGestoresPorId.obtenerUnGestor(id);
+				Gestor gestor11 = obtenerGestoresPorId.obtenerUnGestor(id);
 
-				if (gestor1 != null) {
-					System.out.println("id del gestor :" + gestor1.getId() + "  " + "usuario : " + gestor1.getUsuario()
-							+ " " + "contraseña :" + "  " + gestor1.getPassword());
+				if (gestor11 != null) {
+					System.out.println("------------------------------");
+					System.out.println("Id del gestor :" + gestor11.getId());
+					System.out.println("Usuario: " + gestor11.getUsuario());
+					System.out.println("Contraseña: " + gestor11.getPassword());
+					System.out.println("Correo: " + gestor11.getCorreo());
 
 				} else {
-					System.out.println("");
+					System.out.println("NO EXISTE EL GESTOR");
 				}
 
 				break;
 
 			case 4:
+				// ELIMINANDO GESTOR
 				DateBaseGestor dataBaseEliminar = new DateBaseGestor();
 
 				System.out.println("ELIMINADO GESTOR :");
@@ -162,10 +166,11 @@ public class MainPrincipal {
 
 				break;
 			case 5:
+				// ACTUALIZAR GESTOR
+
 				DateBaseGestor dataBaseactualizarGestor = new DateBaseGestor();
 
 				System.out.println("NOTA: si no desea actualizar el campo ingrese 0");
-				
 
 				System.out.println("-----------------------------------------");
 
@@ -228,7 +233,7 @@ public class MainPrincipal {
 
 				break;
 			case 6:
-
+				// creando cliente
 				DateBaseCliente dateBaseCrearCliente = new DateBaseCliente();
 
 				System.out.println("CREANDO CLIENTE:");
@@ -260,15 +265,13 @@ public class MainPrincipal {
 
 				break;
 			case 7:
+				// obteniendo todos los clientes
 				DateBaseCliente obtenerClientes = new DateBaseCliente();
 
 				System.out.println("MOSTRANDO TODOS LOS CLIENTES");
 				System.out.println("--------------------------------------");
-				// System.out.println("MARQUE CON UN SI O NO" );
-				// String respuesta = Keyboard.next();
 
 				ArrayList<Cliente> clientesMain = obtenerClientes.obtenertodosClientes();
-
 
 				clientesMain.forEach((llamado) -> {
 
@@ -282,493 +285,460 @@ public class MainPrincipal {
 				});
 				break;
 			case 8:
-				//OBTENER CLIENTESD POR ID
+				// OBTENER CLIENTESD POR ID
 				DateBaseCliente obtenerClientesPorId = new DateBaseCliente();
-				
-				System.out.println("OBTENIENDO CLIENTE POR ID" );
-				System.out.println("------------------------------" );
-				System.out.println("COLOQUE EL ID DE CLIENTE:" );
 
+				System.out.println("OBTENIENDO CLIENTE POR ID");
+				System.out.println("------------------------------");
+				System.out.println("COLOQUE EL ID DE CLIENTE:");
 
 				int id1 = keyboard.nextInt();
-				
+
 				Cliente cliente1 = obtenerClientesPorId.obtenerUnCliente(id1);
-				
-				if(cliente1 != null) {
+
+				if (cliente1 != null) {
 					System.out.println("--------------------------------------");
 					System.out.println("id:" + cliente1.getId());
-					System.out.println("usuario :"  + cliente1.getUsuario());
+					System.out.println("usuario :" + cliente1.getUsuario());
 					System.out.println("contraseña :" + cliente1.getPassword());
-					System.out.println("id del gestor:"+ cliente1.getId_Gestor());
+					System.out.println("id del gestor:" + cliente1.getId_Gestor());
 					System.out.println("salgo:" + cliente1.getSaldo());
-				}else {
-					System.out.println("no se ha conseguido el cliente");
+					System.out.println("_______________________________________");
+
+				} else {
+					System.out.println("NO EXISTE EL CLIENTE");
+					System.out.println("_______________________________________");
+
 				}
 				break;
 			case 9:
+				// ELIMINANDO CLIENTE
 				DateBaseCliente dataBaseEliminarCliente = new DateBaseCliente();
-				
-				
-				System.out.println("ELIMINADO CLIENTE :" );
-				System.out.println("----------------------- :" );
-				
-				System.out.println("Inserte id del cliente que deseas eliminar :" );
-				
-				int clienteEliminar = keyboard.nextInt();
-			
-				
-				
-				
-				/*if(GestorEliminar!=null) {
-					quieron colocar que cuando, uno coloque el id del cliente se erronero mande un mensaje
-				}*/
-			
-				
-				
-				boolean clienteBorrado = dataBaseEliminarCliente.eliminarCliente(clienteEliminar);
-				
-				if(clienteBorrado) {
-					
-				System.out.println("el cliente"  + "se ha eliminado :" );
-				}else {
-					System.out.println("el cliente no se ha eliminado :" );
 
-				};
+				System.out.println("ELIMINADO CLIENTE :");
+				System.out.println("----------------------- :");
+
+				System.out.println("Inserte id del cliente que deseas eliminar :");
+
+				int clienteEliminar = keyboard.nextInt();
+
+				boolean clienteBorrado = dataBaseEliminarCliente.eliminarCliente(clienteEliminar);
+
+				if (clienteBorrado) {
+
+					System.out.println("el cliente" + "se ha eliminado :");
+				} else {
+					System.out.println("el cliente no se ha eliminado :");
+
+				}
+				;
 
 				break;
 			case 10:
+				// ACTUALIZAR CLIENTE
 				DateBaseCliente dataBaseActualizarCliente = new DateBaseCliente();
 
 				System.out.println("NOTA: si no desea actualizar el campo ingrese 0");
-					
-				
+
 				System.out.println("-----------------------------------------");
 
 				System.out.println("ingresar id del cliente a actualizar");
 				int idActualizarCliente = keyboard.nextInt();
-				
-				
-				
+
 				Cliente clienteActualizar = dataBaseActualizarCliente.obtenerUnCliente(idActualizarCliente);
-				
+
 				System.out.println("ingresar nuevo nombre de Usuario:");
 				String newUserCliente = keyboard.next();
-				
+
 				System.out.println("ingresar nueva contraseña:");
 				String newPasswordCliente = keyboard.next();
-				
+
 				System.out.println("ingresar nuevo correo:");
 				String newCorreoCliente = keyboard.next();
-				
+
 				System.out.println("ingrese nuevo id del gestor:");
 				String newId_Cliente = keyboard.next();
-				
+
 				System.out.println("ingresar nuevo saldo:");
 				String newSaldoCliente = keyboard.next();
-				
-				
-				
+
 				System.out.println("---------------------------");
 
-				
-				if(newUserCliente.equals(noActualizar)) {
-					
+				if (newUserCliente.equals(noActualizar)) {
+
 					System.out.println("-------usuario no se ha actualizado-------");
 
-				}else {
+				} else {
 					clienteActualizar.setUsuario(newUserCliente);
-				};
-				
-				if(newPasswordCliente.equals(noActualizar)) {
+				}
+				;
+
+				if (newPasswordCliente.equals(noActualizar)) {
 					System.out.println("-----contraseña no se ha actualizado-----");
 
-				}else {
+				} else {
 					clienteActualizar.setPassword(newPasswordCliente);
-				};
-				
-				if(newCorreoCliente.equals(noActualizar)) {
+				}
+				;
+
+				if (newCorreoCliente.equals(noActualizar)) {
 					System.out.println("-----correo no se ha actualizado-------");
 
-				}else {
+				} else {
 					clienteActualizar.setCorreo(newCorreoCliente);
-					
-				};
-				
-				if(newId_Cliente.equals(noActualizar)){
-					System.out.println("-----id de gestor  no se ha actualizado-----");
 
-				}else{
+				}
+				;
+
+				if (newId_Cliente.equals(noActualizar)) {
+					System.out.println("-----id de gestor no se ha actualizado-----");
+
+				} else {
 					clienteActualizar.setId_Gestor(newId_Cliente);
 				}
-				
-				if(newSaldoCliente.equals(noActualizar)){
+
+				if (newSaldoCliente.equals(noActualizar)) {
 					System.out.println("-----el saldo  no se ha actualizado-----");
 
-				}else {
+				} else {
 					clienteActualizar.setSaldo(newSaldoCliente);
 				}
-				
+
 				System.out.println("----------------------------------");
 
-				
 				boolean ActualizadoC = dataBaseActualizarCliente.actualizarCliente(clienteActualizar);
-				
-				if(ActualizadoC) {
-					System.out.println("ACTUALIZACION DE cliente");
-					System.out.println("ID :"+clienteActualizar.getId());
-					System.out.println("ID_GESTOR :"+clienteActualizar.getId_Gestor());
-					System.out.println("USUARIO :"+clienteActualizar.getUsuario());
-					System.out.println("CONTRASEÑA :"+clienteActualizar.getPassword());
-					System.out.println("CORREO :" +clienteActualizar.getCorreo());
-					System.out.println("SALDO:"+clienteActualizar.getSaldo());
-					System.out.println("-------------------------------------");
 
-					
-				}else {
+				if (ActualizadoC) {
+					System.out.println("ACTUALIZACION DE cliente");
+					System.out.println("ID :" + clienteActualizar.getId());
+					System.out.println("ID_GESTOR :" + clienteActualizar.getId_Gestor());
+					System.out.println("USUARIO :" + clienteActualizar.getUsuario());
+					System.out.println("CONTRASEÑA :" + clienteActualizar.getPassword());
+					System.out.println("CORREO :" + clienteActualizar.getCorreo());
+					System.out.println("SALDO:" + clienteActualizar.getSaldo());
+					System.out.println("________________________________________");
+
+				} else {
 					System.out.println("no se ha actualizado el gestor ");
+					System.out.println("________________________________________");
+
 				}
-				
+
 				break;
 			case 11:
-				DateBaseMensaje dateBaseCrearMensaje = new  DateBaseMensaje();
-				
+				// creando mensaje
+				DateBaseMensaje dateBaseCrearMensaje = new DateBaseMensaje();
+
 				System.out.println("CREANDO MENSAJE:");
 				System.out.println("-----------------------");
 
 				System.out.println("Ingrese Id origen :");
 				int id_origenMensaje = keyboard.nextInt();
-			
-				
+
 				System.out.println("Ingrese Id destino :");
 				int id_destinoMensaje = keyboard.nextInt();
-				
+
 				System.out.println("Por favor ingrese mensaje a enviar:");
 				String envioMensaje = keyboard.next();
-				
-			
-				
+
 				Date fecha = new Date();
-				
-				long ms= fecha.getTime();
+
+				long ms = fecha.getTime();
 				Timestamp datetimeMensaje = new Timestamp(ms);
-				
-				//inserta mensaje
-				Mensaje mensaje = new Mensaje(1, id_origenMensaje,id_destinoMensaje,envioMensaje,datetimeMensaje );
-				
+
+				// inserta mensaje
+				Mensaje mensaje = new Mensaje(1, id_origenMensaje, id_destinoMensaje, envioMensaje, datetimeMensaje);
+
 				dateBaseCrearMensaje.insertarMensaje(mensaje);
 
 				System.out.println("-----------------------");
 
 				System.out.println("SU MENSAjE SE HA CREADO CORRECTAMENTE. PUEDE VERIFICARLO EN LA BASE DE DATOS");
 
-
 				break;
 			case 12:
 				// OBTEENR TODOS LOS MENSAJE
 				DateBaseMensaje obtenerMensajesTodos = new DateBaseMensaje();
-				
-				System.out.println("DESEAS OBTENER TODOS LOS MENSAJE" );
-				System.out.println("--------------------------------------" );
-				//System.out.println("MARQUE CON UN SI O NO" );
-			//	String respuesta =  Keyboard.next();
-				
+
+				System.out.println("DESEAS OBTENER TODOS LOS MENSAJE");
+				System.out.println("--------------------------------------");
+
 				ArrayList<Mensaje> mensajeMain = obtenerMensajesTodos.obtenerMensaje();
-				
-				
-					System.out.println("MOSTRANDO MENSAJE:" );
+
+				System.out.println("MOSTRANDO MENSAJE:");
 
 				mensajeMain.forEach((llamado) -> {
-					
-					System.out.println("ID DE MENSAJE :"+llamado.getId());
-					System.out.println("ID DE ORIGEN : " + llamado.getId_origen());
-					System.out.println("ID DESTINO :"+llamado.getId_destino());
 
-					System.out.println("TEXTO DE MENSAJE:"+ llamado.getTexto());
-					System.out.println("FECHA Y HORA DE ENVIO DE MENSAJE:"+llamado.getDatetime());
-					System.out.println("--------------------------------------" );
+					System.out.println("ID DE MENSAJE :" + llamado.getId());
+					System.out.println("ID DE ORIGEN : " + llamado.getId_origen());
+					System.out.println("ID DESTINO :" + llamado.getId_destino());
+					System.out.println("TEXTO DE MENSAJE:" + llamado.getTexto());
+					System.out.println("FECHA Y HORA DE ENVIO DE MENSAJE:" + llamado.getDatetime());
+					System.out.println("_______________________________________");
 
 				});
 				break;
 			case 13:
 				// obteccion de un mensaje
-				
-				DateBaseMensaje obtenerMensajePorId = new DateBaseMensaje();
-				
-				System.out.println("OBTENIENDO MENSAJE POR ID" );
-				System.out.println("------------------------------" );
-				System.out.println("COLOQUE EL ID DE MENSAJE:" );
 
+				DateBaseMensaje obtenerMensajePorId = new DateBaseMensaje();
+
+				System.out.println("OBTENIENDO MENSAJE POR ID");
+				System.out.println("------------------------------");
+				System.out.println("COLOQUE EL ID DE MENSAJE:");
 
 				int idMensaje = keyboard.nextInt();
-				
+
 				Mensaje mensajeId = obtenerMensajePorId.obtenerMensajeId(idMensaje);
-				
-				if(mensajeId != null) {
-					System.out.println("id de mensaje:"+ mensajeId.getId());
-					System.out.println("id de origen:"+ mensajeId.getId_origen());
-					System.out.println("id de destino:"+ mensajeId.getId_destino());
-					System.out.println("Mensaje:"+ mensajeId.getTexto());
-					System.out.println("fecha y hora de envio:"+ mensajeId.getDatetime());
-					System.out.println("-----------------------------------------------" );
 
+				if (mensajeId != null) {
+					System.out.println("id de mensaje:" + mensajeId.getId());
+					System.out.println("id de origen:" + mensajeId.getId_origen());
+					System.out.println("id de destino:" + mensajeId.getId_destino());
+					System.out.println("Mensaje:" + mensajeId.getTexto());
+					System.out.println("fecha y hora de envio:" + mensajeId.getDatetime());
+					System.out.println("__________________________________________");
 
-
-
-					
-				}else {
+				} else {
 					System.out.println("");
+					System.out.println("__________________________________________");
 				}
 
 				break;
 			case 14:
+				// eliminando mensaje
 				DateBaseMensaje dataBaseEliminarMensaje = new DateBaseMensaje();
-				
-				
-				System.out.println("ELIMINADO MENSAJE :" );
-				System.out.println("----------------------- :" );
-				
-				System.out.println("INSERTE EL ID DEL MENSAJE QUE DESEAS ELIMINAR :" );
-				
-				int mensajeEliminar = keyboard.nextInt();
-			
-				
-				
-				
-				/*if(GestorEliminar) {
-					
-				}*/
-				
-				
-				
-				boolean mensajeBorrado = dataBaseEliminarMensaje.eliminarMensaje(mensajeEliminar);
-				
-				if(mensajeBorrado) {
-					
-				System.out.println("EL MENSAJE" +" "+mensajeEliminar+ " " + "SE HA ELIMINADO :" );
-				}else {
-					System.out.println("EL MENSAJE NO SE HA ELIMINADO :" );
 
-				};
+				System.out.println("ELIMINADO MENSAJE :");
+				System.out.println("----------------------- :");
+
+				System.out.println("INSERTE EL ID DEL MENSAJE QUE DESEAS ELIMINAR :");
+
+				int mensajeEliminar = keyboard.nextInt();
+
+				boolean mensajeBorrado = dataBaseEliminarMensaje.eliminarMensaje(mensajeEliminar);
+
+				if (mensajeBorrado) {
+
+					System.out.println("EL MENSAJE" + " " + mensajeEliminar + " " + "SE HA ELIMINADO :");
+					System.out.println("__________________________________________");
+				} else {
+					System.out.println("EL MENSAJE NO SE HA ELIMINADO :");
+					System.out.println("__________________________________________");
+				}
+				;
 
 				break;
 			case 15:
+				// actualizar mensaje
 				DateBaseMensaje dataBaseActualizarMensaje = new DateBaseMensaje();
 
 				System.out.println("NOTA: si no desea actualizar el campo ingrese 0");
-				
+
 				System.out.println("-----------------------------------------");
 
 				System.out.println("INGRESE EL ID DEL MENSAJE QUE DESEAS ACTUALIZAR:");
 				int idActualizarMensaje = keyboard.nextInt();
-				
-				
-				
+
 				Mensaje mensaje1 = dataBaseActualizarMensaje.obtenerMensajeId(idActualizarMensaje);
-				
+
 				System.out.println("ingresar nuevo id de origen");
 				int newIdOrigenMensaje = keyboard.nextInt();
-				
+
 				System.out.println("ingresar nuevo id destino");
 				int newIdDestinoMensaje = keyboard.nextInt();
-				
+
 				System.out.println("ingresar nuevo texto");
 				String newTextoMensaje = keyboard.next();
-				
+
 				System.out.println("ingrese 'si' para actualizar la fecha");
-				String respuesta =keyboard.next();
+				String respuesta = keyboard.next();
 				Date fecha1 = new Date();
-				
-				long ms1= fecha1.getTime();
+
+				long ms1 = fecha1.getTime();
 				Timestamp datetime1 = new Timestamp(ms1);
-				
-				
-				
+
 				System.out.println("---------------------------");
 
-				
-				if(newIdOrigenMensaje==0) {
-					
+				if (newIdOrigenMensaje == 0) {
+
 					System.out.println("id_origen no se ha actualizado");
 
-				}else {
+				} else {
 					mensaje1.setId_origen(newIdOrigenMensaje);
-				};
-				
-				if(newIdDestinoMensaje ==0) {
+				}
+				;
+
+				if (newIdDestinoMensaje == 0) {
 					System.out.println("id_destino no se ha actualizado");
 
-				}else {
+				} else {
 					mensaje1.setId_destino(newIdDestinoMensaje);
-				
-				};
-				
-				if(newTextoMensaje.equals(noActualizar)) {
+
+				}
+				;
+
+				if (newTextoMensaje.equals(noActualizar)) {
 					System.out.println("texto no se ha actualizado");
 
-				}else {
+				} else {
 					mensaje1.setTexto(newTextoMensaje);
-					
-				};
-				
-				if(respuesta.equals(noActualizar)) {
+
+				}
+				;
+
+				if (respuesta.equals(noActualizar)) {
 					System.out.println("fecha y hora no se ha actualizado");
-				
-				}else {
+
+				} else {
 					mensaje1.setDatetime(datetime1);
 				}
-				
-				
+
 				System.out.println("----------------------------------");
 
-				
 				boolean mensajeActualizado = dataBaseActualizarMensaje.actualizarMensaje(mensaje1);
-				
-				if(mensajeActualizado) {
+
+				if (mensajeActualizado) {
 					System.out.println("ACTUALIZACION DE MENSAJE");
-					System.out.println("ID :"+mensaje1.getId());
-					System.out.println("ID_ORIGEN:"+mensaje1.getId_origen());
-					System.out.println("ID_DESTINO :"+mensaje1.getId_destino());
-					System.out.println("TEXTO :" +mensaje1.getTexto());
-					System.out.println("FECHA :" +mensaje1.getDatetime());
-					System.out.println("----------------------------------");
+					System.out.println("ID :" + mensaje1.getId());
+					System.out.println("ID_ORIGEN:" + mensaje1.getId_origen());
+					System.out.println("ID_DESTINO :" + mensaje1.getId_destino());
+					System.out.println("TEXTO :" + mensaje1.getTexto());
+					System.out.println("FECHA :" + mensaje1.getDatetime());
+					System.out.println("__________________________________________");
 
-
-					
-				}else {
+				} else {
 					System.out.println("no se ha actualizado el gestor ");
+					System.out.println("__________________________________________");
+
 				}
-				
 
 				break;
 			case 16:
-				DateBaseTransferencia dateBaseCrearTransferencia = new  DateBaseTransferencia();
-				
+				// creando transferencia
+				DateBaseTransferencia dateBaseCrearTransferencia = new DateBaseTransferencia();
+
 				System.out.println("CREANDO TRANSFERENCIA:");
 				System.out.println("-----------------------");
 
-			
-				
 				System.out.println("Ingrese Id ordenante :");
 				int id_ordenanteTransferencia = keyboard.nextInt();
-				
+
 				System.out.println("ingrese Id Benefeciario:");
 				int id_beneficiarioTransferencia = keyboard.nextInt();
-				
+
 				System.out.println("Ingrese Importe:");
 				double importeTransferencia = keyboard.nextDouble();
-			
+
 				System.out.println("Ingrese Concepto:");
 				String conceptoTransferencia = keyboard.next();
-				
-				
-				
+
 				Date fecha2 = new Date();
-				
-				long ms2= fecha2.getTime();
+
+				long ms2 = fecha2.getTime();
 				Timestamp datetime2 = new Timestamp(ms2);
-				
-				//inserta mensaje
-				Transferencia transferencia = new Transferencia(1,id_ordenanteTransferencia,id_beneficiarioTransferencia,importeTransferencia,conceptoTransferencia,datetime2 );
-				
+
+				// inserta mensaje
+				Transferencia transferencia = new Transferencia(1, id_ordenanteTransferencia,
+						id_beneficiarioTransferencia, importeTransferencia, conceptoTransferencia, datetime2);
+
 				dateBaseCrearTransferencia.insertarTransferencia(transferencia);
 
 				System.out.println("-----------------------");
 
-				System.out.println("SU TRANSFERENCIA SE HA CREADO CORRECTAMENTE. PUEDE VERIFICARLO EN LA BASE DE DATOS");
+				System.out
+						.println("SU TRANSFERENCIA SE HA CREADO CORRECTAMENTE. PUEDE VERIFICARLO EN LA BASE DE DATOS");
+
+				System.out.println("___________________________");
 
 				break;
 			case 17:
+				// obtener todas las transferencia
 				DateBaseTransferencia obtenerTransferenciaTodos = new DateBaseTransferencia();
-				
-				System.out.println("MOSTRANDO TODAS LAS TRANSFERENCIA" );
-				System.out.println("--------------------------------------" );
-				//System.out.println("MARQUE CON UN SI O NO" );
-			//	String respuesta =  Keyboard.next();
-				
+
+				System.out.println("MOSTRANDO TODAS LAS TRANSFERENCIA");
+				System.out.println("--------------------------------------");
+
 				ArrayList<Transferencia> transferenciaMain = obtenerTransferenciaTodos.obtenerTodasTransferencia();
-				
-				
 
 				transferenciaMain.forEach((llamado) -> {
-					
-					System.out.println("id de transferencia:"+llamado.getId());
+
+					System.out.println("id de transferencia:" + llamado.getId());
 					System.out.println("id ordenante : " + llamado.getId_ordenante());
-					System.out.println("id benefeciario :"+llamado.getId_beneficiario());
-					System.out.println("Importe:"+ llamado.getImporte());
-					System.out.println("Concepto:"+ llamado.getImporte());
-					System.out.println("Fecha y hora de envio de transferencia: "+llamado.getFecha());
-					System.out.println("--------------------------------------" );
+					System.out.println("id benefeciario :" + llamado.getId_beneficiario());
+					System.out.println("Importe:" + llamado.getImporte());
+					System.out.println("Concepto:" + llamado.getImporte());
+					System.out.println("Fecha y hora de envio de transferencia: " + llamado.getFecha());
+					System.out.println("___________________________");
 
 				});
 				break;
 			case 18:
+				// obtener transferecias por id
 				DateBaseTransferencia obtenerTransferenciaPorId = new DateBaseTransferencia();
-				
-				System.out.println("OBTENIENDO TRANSFERENCIA POR ID" );
-				System.out.println("------------------------------" );
-				System.out.println("COLOQUE EL ID DE TRANSFERENCIA:" );
 
+				System.out.println("OBTENIENDO TRANSFERENCIA POR ID");
+				System.out.println("------------------------------");
+				System.out.println("COLOQUE EL ID DE TRANSFERENCIA:");
+
+				System.out.println("------------------------------");
 
 				int idTransferencia = keyboard.nextInt();
-				
+
 				Transferencia transferencia1 = obtenerTransferenciaPorId.obtenerTransferenciaId(idTransferencia);
-				
-				if(transferencia1 != null) {
-					System.out.println("id de transferencia:"+ transferencia1.getId());
-					System.out.println("id ordenante:"+ transferencia1.getId_ordenante());
-					System.out.println("id beneficiario:"+ transferencia1.getId_beneficiario());
-					System.out.println("Importe :"+ transferencia1.getImporte());
-					System.out.println("Concepto :"+ transferencia1.getConcepto());
-					System.out.println("Concepto:" + transferencia1.getFecha());
 
+				if (transferencia1 != null) {
+					System.out.println("id de transferencia:" + transferencia1.getId());
+					System.out.println("id ordenante:" + transferencia1.getId_ordenante());
+					System.out.println("id beneficiario:" + transferencia1.getId_beneficiario());
+					System.out.println("Importe :" + transferencia1.getImporte());
+					System.out.println("Concepto :" + transferencia1.getConcepto());
+					System.out.println("Fecha:" + transferencia1.getFecha());
+					System.out.println("___________________________");
 
-
-					
-				}else {
-					System.out.println("");
+				} else {
+					System.out.println("LA TRANSFERENCIA NO EXISTE");
 				}
 				break;
 			case 19:
+				// ELIMINAR TRANSFERENCIA
 				DateBaseTransferencia dataBaseEliminarTransferencia = new DateBaseTransferencia();
-				
-				
-				System.out.println("ELIMINADO TRANSFERENCIA :" );
-				System.out.println("----------------------- :" );
-				
-				System.out.println("Inserte id de la transferencia que deseas eliminar :" );
-				
-				int transferenciaEliminar = keyboard.nextInt();
-			
-				
-				
-				
-				/*if(GestorEliminar) {
-					
-				}*/
-				
-				
-				
-				boolean transferenciaBorrado = dataBaseEliminarTransferencia.eliminarTransferencia(transferenciaEliminar);
-				
-				if(transferenciaBorrado) {
-					
-				System.out.println("la transferencia" +" "+transferenciaEliminar+ " " + "se ha eliminado :" );
-				}else {
-					System.out.println("el mensaje no se ha eliminado :" );
 
-				};
+				System.out.println("ELIMINADO TRANSFERENCIA :");
+				System.out.println("----------------------- :");
+
+				System.out.println("Inserte id de la transferencia que deseas eliminar :");
+
+				int transferenciaEliminar = keyboard.nextInt();
+
+				boolean transferenciaBorrado = dataBaseEliminarTransferencia
+						.eliminarTransferencia(transferenciaEliminar);
+
+				if (transferenciaBorrado) {
+
+					System.out.println("la transferencia" + " " + transferenciaEliminar + " " + "se ha eliminado :");
+					System.out.println("___________________________");
+
+				} else {
+					System.out.println("el mensaje no se ha eliminado :");
+					System.out.println("___________________________");
+				}
+				;
 				break;
 			case 20:
+				// ACTUALIZA TRANSFERECNIA
 				DateBaseTransferencia dataBaseActualizarTransferencia = new DateBaseTransferencia();
 
 				System.out.println("NOTA: si no desea actualizar el campo ingrese 0");
-				
+
 				System.out.println("-----------------------------------------");
 
 				System.out.println("ingresar id de la transferencia a actualizar");
 				int idActualizarTransferencia = keyboard.nextInt();
 
-				Transferencia transferencia2 = dataBaseActualizarTransferencia.obtenerTransferenciaId(idActualizarTransferencia);
+				Transferencia transferencia2 = dataBaseActualizarTransferencia
+						.obtenerTransferenciaId(idActualizarTransferencia);
+				System.out.println("-----------------------------------------");
 
 				System.out.println("ingresar nuevo id de ordenante:");
 				int newIdOrdenanteTransferencia = keyboard.nextInt();
@@ -778,16 +748,13 @@ public class MainPrincipal {
 
 				System.out.println("ingresar nuevo importe:");
 				double newImporteTransferencia = keyboard.nextDouble();
-				
+
 				System.out.println("ingresar nuevo concepto:");
 				String newConceptoTransferencia = keyboard.next();
 
 				System.out.println("coloque 'si' para actualizar fecha");
 				String respuesta2 = keyboard.next();
-				
-				
-				
-				
+
 				Date fecha3 = new Date();
 
 				long ms3 = fecha3.getTime();
@@ -817,7 +784,6 @@ public class MainPrincipal {
 				} else {
 					transferencia2.setImporte(newImporteTransferencia);
 				}
-				
 
 				if (newConceptoTransferencia.equals(noActualizar)) {
 					System.out.println("---------concepto no se ha actualizado---------");
@@ -826,38 +792,35 @@ public class MainPrincipal {
 					transferencia2.setConcepto(newConceptoTransferencia);
 
 				}
-				if(respuesta2.equals(noActualizar)){
+				if (respuesta2.equals(noActualizar)) {
 					System.out.println("-------fecha y hora no se ha actualizado-----");
 
-				}else {
+				} else {
 					transferencia2.setFecha(datetime3);
 
-				};
-
-				/*if (datetime.equals(noActualizar)) {
-					System.out.println("fecha y hora no se ha actualizado");
-
-				} else {
-					transferencia.setFecha(datetime);
-				}*/
+				}
+				;
 
 				System.out.println("----------------------------------");
 
-				boolean transferenciaActualizado = dataBaseActualizarTransferencia.actualizarTransferencia(transferencia2);
+				boolean transferenciaActualizado = dataBaseActualizarTransferencia
+						.actualizarTransferencia(transferencia2);
 
 				if (transferenciaActualizado) {
 					System.out.println("ACTUALIZACION TRANSFERENCIA");
-					
+
 					System.out.println("ID :" + transferencia2.getId());
 					System.out.println("ID ORDENANTE :" + transferencia2.getId_ordenante());
 					System.out.println("ID BENEFICIARIO :" + transferencia2.getId_beneficiario());
 					System.out.println("IMPORTE:" + transferencia2.getImporte());
 					System.out.println("CONCEPTO:" + transferencia2.getConcepto());
-					System.out.println("FECHA Y HORA:" + transferencia2.getFecha()); 	
-
+					System.out.println("FECHA Y HORA:" + transferencia2.getFecha());
+					System.out.println("__________________________________");
 
 				} else {
 					System.out.println("no se ha actualizado el gestor ");
+					System.out.println("__________________________________");
+
 				}
 
 				break;

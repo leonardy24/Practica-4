@@ -1,6 +1,5 @@
 package app.curso.banco.db;
 
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -16,54 +15,49 @@ import cliente.gestor.Gestor;
 import cliente.gestor.Mensaje;
 import cliente.gestor.Transferencia;
 import java.sql.*;
+
 public class DateBaseTransferencia {
 
 	private Connection conexion;
-	
-	
+
 	public DateBaseTransferencia() {
-		
-		
+
 		try {
 
-		conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/banco", "banco", "banco");
+			conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/banco", "banco", "banco");
 
-									
-	} catch (SQLException e) {
-		e.printStackTrace();
-}
-			
-}
-	
-	public boolean insertarTransferencia (Transferencia transferencia) {
-		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	public boolean insertarTransferencia(Transferencia transferencia) {
+
 		PreparedStatement IngresarTransferencia = null;
 
 		try {
-			
+
 			String transferenciaBaseDatos = "INSERT INTO transferencia(id_ordenante,id_beneficiario,importe,concepto,fecha)VALUES(?,?,?,?,?)";
-			
+
 			IngresarTransferencia = conexion.prepareStatement(transferenciaBaseDatos);
-			
+
 			IngresarTransferencia.setInt(1, transferencia.getId_ordenante());
-			
+
 			IngresarTransferencia.setInt(2, transferencia.getId_beneficiario());
-			
+
 			IngresarTransferencia.setDouble(3, transferencia.getImporte());
-			
-			IngresarTransferencia.setString(4,transferencia.getConcepto());
+
+			IngresarTransferencia.setString(4, transferencia.getConcepto());
 
 			IngresarTransferencia.setTimestamp(5, transferencia.getFecha());
 
-			
-			
 			IngresarTransferencia.executeUpdate();
-			
+
 			IngresarTransferencia.close();
-			
+
 			return true;
-		
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -76,46 +70,42 @@ public class DateBaseTransferencia {
 				}
 			}
 		}
-	return false;	
+		return false;
 	}
-		
-	
-		public ArrayList<Transferencia> obtenerTodasTransferencia() {
 
-			Statement instruccion = null;
+	public ArrayList<Transferencia> obtenerTodasTransferencia() {
 
-			ArrayList<Transferencia> transferenciaMain = new ArrayList<Transferencia>();
+		Statement instruccion = null;
 
-			try {
+		ArrayList<Transferencia> transferenciaMain = new ArrayList<Transferencia>();
 
-				instruccion = conexion.createStatement();
+		try {
 
-				String codigo = "SELECT * FROM transferencia";
+			instruccion = conexion.createStatement();
 
-				ResultSet resultados = instruccion.executeQuery(codigo);
+			String codigo = "SELECT * FROM transferencia";
 
-				while (resultados.next()) {
+			ResultSet resultados = instruccion.executeQuery(codigo);
 
-					int id = resultados.getInt("id");
-					int id_ordenante=resultados.getInt("id_ordenante");
-					int id_beneficiario= resultados.getInt("id_beneficiario");
-					double importe=resultados.getDouble("importe");
-					String concepto=resultados.getString("concepto");
-					Timestamp fecha = resultados.getTimestamp("fecha");
+			while (resultados.next()) {
 
-					Transferencia transferencia = new Transferencia(id, id_ordenante, id_beneficiario, importe,concepto,fecha);
+				int id = resultados.getInt("id");
+				int id_ordenante = resultados.getInt("id_ordenante");
+				int id_beneficiario = resultados.getInt("id_beneficiario");
+				double importe = resultados.getDouble("importe");
+				String concepto = resultados.getString("concepto");
+				Timestamp fecha = resultados.getTimestamp("fecha");
 
-					transferenciaMain.add(transferencia);
-				}
+				Transferencia transferencia = new Transferencia(id, id_ordenante, id_beneficiario, importe, concepto,
+						fecha);
 
-				instruccion.close();
+				transferenciaMain.add(transferencia);
+			}
 
-				return transferenciaMain;
+			instruccion.close();
 
-			
-			
-			
-			
+			return transferenciaMain;
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -129,27 +119,25 @@ public class DateBaseTransferencia {
 				}
 			}
 		}
-		
+
 		return null;
 	}
 
-		
 	public boolean eliminarTransferencia(int id) {
-		
-		PreparedStatement instruccion=null;
-		
+
+		PreparedStatement instruccion = null;
+
 		try {
-			String EliminarTransferencia ="DELETE FROM transferencia WHERE id=?";
-			
+			String EliminarTransferencia = "DELETE FROM transferencia WHERE id=?";
+
 			instruccion = conexion.prepareStatement(EliminarTransferencia);
-			
+
 			instruccion.setInt(1, id);
-			
-			int llamadoEliminar =instruccion.executeUpdate();
-			
-			return llamadoEliminar!=0;
-			
-			
+
+			int llamadoEliminar = instruccion.executeUpdate();
+
+			return llamadoEliminar != 0;
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -163,44 +151,39 @@ public class DateBaseTransferencia {
 				}
 			}
 		}
-		
-		
-		
-		
-		
-		
+
 		return false;
 	};
 
-	
 	public Transferencia obtenerTransferenciaId(int id) {
-		
-		PreparedStatement instruccion =null;
-		
-		Transferencia transferencia=null;
-		
+
+		PreparedStatement instruccion = null;
+
+		Transferencia transferencia = null;
+
 		try {
-			
-			String obtener ="SELECT * FROM transferencia WHERE id=?";
-			
+
+			String obtener = "SELECT * FROM transferencia WHERE id=?";
+
 			instruccion = conexion.prepareStatement(obtener);
-			
+
 			instruccion.setInt(1, id);
-			
+
 			ResultSet resultado = instruccion.executeQuery();
-			
-			if(resultado.next()) {
+
+			if (resultado.next()) {
 				transferencia = new Transferencia();
 				transferencia.setId(resultado.getInt("id"));
-				transferencia.setId_ordenante(resultado.getInt("id_ordenante"));;
+				transferencia.setId_ordenante(resultado.getInt("id_ordenante"));
+				;
 				transferencia.setId_beneficiario(resultado.getInt("id_beneficiario"));
 				transferencia.setImporte(resultado.getDouble("importe"));
 				transferencia.setConcepto(resultado.getString("concepto"));
 				transferencia.setFecha(resultado.getTimestamp("fecha"));
 
-			};
-			
-			
+			}
+			;
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -214,39 +197,36 @@ public class DateBaseTransferencia {
 				}
 			}
 		}
-		
-		
+
 		return transferencia;
 	}
-		
+
 	public boolean actualizarTransferencia(Transferencia transferencia) {
-		
-		PreparedStatement instruccion =null;
-		
+
+		PreparedStatement instruccion = null;
+
 		try {
-			
-		String actualizar ="UPDATE transferencia SET  id_ordenante = ?, id_beneficiario = ?, importe =?, concepto=?,fecha=? WHERE id =?";
-		
-		
-		instruccion = conexion.prepareStatement(actualizar);
-		
-		
-		instruccion.setInt(1, transferencia.getId_ordenante());
-		
-		instruccion.setInt(2, transferencia.getId_beneficiario());
-		
-		instruccion.setDouble(3, transferencia.getImporte());
-		
-		instruccion.setString(4, transferencia.getConcepto());
 
-		instruccion.setTimestamp(5, transferencia.getFecha());;
-		
-		instruccion.setInt(6, transferencia.getId());
-		
-		
-		int filasActualizadas = instruccion.executeUpdate();
+			String actualizar = "UPDATE transferencia SET  id_ordenante = ?, id_beneficiario = ?, importe =?, concepto=?,fecha=? WHERE id =?";
 
-		return filasActualizadas !=0;
+			instruccion = conexion.prepareStatement(actualizar);
+
+			instruccion.setInt(1, transferencia.getId_ordenante());
+
+			instruccion.setInt(2, transferencia.getId_beneficiario());
+
+			instruccion.setDouble(3, transferencia.getImporte());
+
+			instruccion.setString(4, transferencia.getConcepto());
+
+			instruccion.setTimestamp(5, transferencia.getFecha());
+			;
+
+			instruccion.setInt(6, transferencia.getId());
+
+			int filasActualizadas = instruccion.executeUpdate();
+
+			return filasActualizadas != 0;
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -261,12 +241,8 @@ public class DateBaseTransferencia {
 				}
 			}
 		}
-		
-		
-		
+
 		return false;
 	}
 
-	
-	
 }

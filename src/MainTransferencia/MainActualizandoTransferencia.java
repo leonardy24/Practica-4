@@ -22,7 +22,7 @@ public class MainActualizandoTransferencia {
 		System.out.println("NOTA: si no desea actualizar el campo ingrese 0");
 		String noActualizar = "0";
 		int noActuazalizar1 = 0;
-		String noActualizarFecha="no";
+		String noActualizarFecha = "no";
 		System.out.println("-----------------------------------------");
 
 		System.out.println("ingresar id de la transferencia a actualizar");
@@ -38,17 +38,14 @@ public class MainActualizandoTransferencia {
 
 		System.out.println("ingresar nuevo importe:");
 		double newImporte = Keyboard.nextDouble();
-		
+
 		System.out.println("ingresar nuevo concepto:");
 		String newConcepto = Keyboard.next();
 
 		System.out.println("coloque 'si' para actualizar fecha");
 		System.out.println("coloque 'no' para  no actualizar fecha");
 		String respuesta = Keyboard.next();
-		
-		
-		
-		
+
 		Date fecha = new Date();
 
 		long ms = fecha.getTime();
@@ -78,7 +75,6 @@ public class MainActualizandoTransferencia {
 		} else {
 			transferencia.setImporte(newImporte);
 		}
-		
 
 		if (newConcepto.equals(noActualizar)) {
 			System.out.println("concepto no se ha actualizado");
@@ -87,20 +83,14 @@ public class MainActualizandoTransferencia {
 			transferencia.setConcepto(newConcepto);
 
 		}
-		if(respuesta.equals(noActualizarFecha)){
-			System.out.println("fecha y hora no se ha actualizado");
-
-		}else {
-			transferencia.setFecha(datetime);
-
-		};
-
-		/*if (datetime.equals(noActualizar)) {
+		if (respuesta.equals(noActualizarFecha)) {
 			System.out.println("fecha y hora no se ha actualizado");
 
 		} else {
 			transferencia.setFecha(datetime);
-		}*/
+
+		}
+		;
 
 		System.out.println("----------------------------------");
 
@@ -108,14 +98,13 @@ public class MainActualizandoTransferencia {
 
 		if (transferenciaActualizado) {
 			System.out.println("ACTUALIZACION TRANSFERENCIA");
-			
+
 			System.out.println("ID :" + transferencia.getId());
 			System.out.println("ID ORDENANTE :" + transferencia.getId_ordenante());
 			System.out.println("ID BENEFICIARIO :" + transferencia.getId_beneficiario());
 			System.out.println("IMPORTE:" + transferencia.getImporte());
 			System.out.println("CONCEPTO:" + transferencia.getConcepto());
-			System.out.println("FECHA Y HORA:" + transferencia.getFecha()); 	
-
+			System.out.println("FECHA Y HORA:" + transferencia.getFecha());
 
 		} else {
 			System.out.println("no se ha actualizado el gestor ");
